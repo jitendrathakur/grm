@@ -31,4 +31,12 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
+
+
+	function _sendJson($data) {
+		$this->layout = false;			
+		$this->autoRender = false;
+		header('Content-Type: application/json');
+		return json_encode($data);
+	}
 }

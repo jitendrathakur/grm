@@ -15,7 +15,7 @@ class CompaniesController extends AppController {
  *
  * @var array
  */
-	public $components = array('Paginator', 'Session');
+	public $components = array('RequestHandler', 'Paginator', 'Session');
 
 /**
  * index method
@@ -48,14 +48,20 @@ class CompaniesController extends AppController {
  * @return void
  */
 	public function add() {
-		if ($this->request->is('post')) {
+		//debug($this->request->data);
+		$response = array();
+		if ($this->request->is('post')) {		
+			
 			$this->Company->create();
 			if ($this->Company->save($this->request->data)) {
-				$this->Session->setFlash(__('The company has been saved.'));
-				return $this->redirect(array('action' => 'index'));
+				//$this->Session->setFlash(__('The company has been saved.'));
+				
+				$response['success'] = true;
+				return $this->_sendJson($response);				
 			} else {
-				$this->Session->setFlash(__('The company could not be saved. Please, try again.'));
+				//$this->Session->setFlash(__('The company could not be saved. Please, try again.'));
 			}
+			exit;
 		}
 	}
 

@@ -1,18 +1,20 @@
-<div class="companies form">
+<div class="companies form" ng-controller="company">
 <?php echo $this->Form->create('Company'); ?>
 	<fieldset>
 		<legend><?php echo __('Add Company'); ?></legend>
 	<?php
-		echo $this->Form->input('name');
-		echo $this->Form->input('tag');
-		echo $this->Form->input('description');
-		echo $this->Form->input('city');
-		echo $this->Form->input('state');
-		echo $this->Form->input('country');
-		echo $this->Form->input('pincode');
+		echo $this->Form->input('name', array('ng-model' => 'name'));
+		echo $this->Form->input('tag', array('ng-model' => 'tag'));
+		echo $this->Form->input('description', array('ng-model' => 'description'));
+		echo $this->Form->input('city', array('ng-model' => 'city'));
+		echo $this->Form->input('state', array('ng-model' => 'state'));
+		echo $this->Form->input('country', array('ng-model' => 'country'));
+		echo $this->Form->input('pincode', array('ng-model' => 'pincode'));
 	?>
 	</fieldset>
-<?php echo $this->Form->end(__('Submit')); ?>
+
+	<input type="button" value="submit" ng-click="submitForm()" />
+<?php echo $this->Form->end(); ?>
 </div>
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>

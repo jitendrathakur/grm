@@ -23,6 +23,16 @@ class CompaniesController extends AppController {
  * @return void
  */
 	public function index() {
+		// debug("jitz");
+		// exit;
+		$this->Company->recursive = 0;
+		$companies = $this->Paginator->paginate();
+		return $this->_sendJson($companies);
+		//$this->set('companies', $companies);
+	}
+
+
+	public function getlist() {		
 		$this->Company->recursive = 0;
 		$this->set('companies', $this->Paginator->paginate());
 	}

@@ -1,4 +1,4 @@
-<div class="companies form" ng-controller="company">
+<div class="companies form" >
 <?php echo $this->Form->create('Company'); ?>
 	<fieldset>
 		<legend><?php echo __('Add Company'); ?></legend>

@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+
+		<link rel="stylesheet" src="css/bootstrap.min.css" ></script>
+		<script type="text/javascript" src="js/angular.min.js" ></script>
+		<script type="text/javascript" src="js/ui-bootstrap-tpls-0.13.4.min.js" ></script>
+		
+		<script type="text/javascript" src="js/angular-route.min.js" ></script>
+		<script type="text/javascript" src="js/custom.js" ></script>
+	</head>	
+		
+	<body ng-app="grm">
+		<div id="container" ng-controller="company">
+			<div ng-view=""></div>	
+			<table>
+				<tr>
+					<th>Id</th>
+					<th>Name</th>
+					<th>City</th>
+				</tr>
+				<tr ng-repeat="result in result">
+					<td>{{result.Company.id}}</td>
+					<td>{{result.Company.name}}</td>
+					<td>{{result.Company.city}}</td>					
+				</tr>
+				
+			</table>
+
+			<a href="/add">Add</a>
+		
+						
+		</div>	
+	</body>
+
+</html>

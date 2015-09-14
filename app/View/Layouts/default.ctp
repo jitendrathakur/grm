@@ -25,12 +25,15 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		<?php echo $cakeDescription ?>:
 		<?php echo $this->fetch('title'); ?>
 	</title>
+
 	<?php
 		echo $this->Html->meta('icon');
 
 		echo $this->Html->css('cake.generic');
 
 		echo $this->Html->script('angular.min');
+		echo $this->Html->script('angular-route.min');
+
 		echo $this->Html->script('custom');
 
 		echo $this->fetch('meta');
@@ -39,16 +42,12 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	?>
 </head>
 <body ng-app="grm">
-	<div id="container">
+	<div id="container" ng-controller="company">
 		<div id="header">
 			<h1><?php echo $this->Html->link($cakeDescription, 'http://cakephp.org'); ?></h1>
 		</div>
-		<div id="content">
-
-			<?php echo $this->Session->flash(); ?>
-
-			<?php echo $this->fetch('content'); ?>
-		</div>
+		<div  ng-view></div>
+		<?php echo $this->fetch('content'); ?>
 		<div id="footer">
 			<?php echo $this->Html->link(
 					$this->Html->image('cake.power.gif', array('alt' => $cakeDescription, 'border' => '0')),

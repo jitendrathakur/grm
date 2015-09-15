@@ -1,0 +1,37 @@
+<form method="post" id="CompanyAddForm" action="">
+
+    </div>
+    <fieldset>
+        <legend>Add Company</legend>
+        <div class="input text required">
+            <label for="CompanyName">Name</label>
+            <input type="text" required="required" id="CompanyName" maxlength="255" ng-model="name" name="name" >
+        </div>
+        <div class="input text required">
+            <label for="CompanyTag">Tag</label>
+            <input type="text" required="required" id="CompanyTag" maxlength="255" ng-model="tag" name="tag">
+        </div>
+        <div class="input textarea required">
+            <label for="CompanyDescription">Description</label>
+            <textarea required="required" id="CompanyDescription" rows="6" cols="30" ng-model="description" name="description"></textarea>
+        </div>
+        <div class="input text required">
+            <label for="CompanyCity">City</label>
+            <input type="text" required="required" id="CompanyCity" maxlength="255" ng-model="city" name="city">
+        </div>
+        <div class="input text required">
+            <label for="CompanyState">State</label>
+            <input type="text" required="required" id="CompanyState" maxlength="255" ng-model="state" name="state">
+        </div>
+        <div class="input text required">
+            <label for="CompanyCountry">Country</label>
+            <input type="text" required="required" id="CompanyCountry" maxlength="255" ng-model="country" name="country">
+        </div>
+        <div class="input text required">
+            <label for="CompanyPincode">Pincode</label>
+            <input type="text" required="required" id="CompanyPincode" maxlength="20" ng-model="pincode" name="pincode">
+        </div>
+    </fieldset>
+
+    <input type="button" ng-click="submitForm()" value="submit">
+</form>

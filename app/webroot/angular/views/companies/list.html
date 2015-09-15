@@ -1,3 +1,15 @@
-{{company.Company}}
+<table>
+	<tr>
+		<th>Id</th>
+		<th>Name</th>
+		<th>City</th>
+	</tr>
+	<tr ng-repeat="result in result">
+		<td>{{result.Company.id}}</td>
+		<td>{{result.Company.name}}</td>
+		<td>{{result.Company.city}}</td>					
+	</tr>
+	
+</table>
 
-jitz
+<a ng-href="add" href="add">Add</a>

@@ -1,18 +1,24 @@
 var myApp = angular.module('grm', ['ngRoute']);
 
-myApp.config(["$routeProvider", function($routeProvider) {
+myApp.config(function($locationProvider, $routeProvider) {
+	
 	$routeProvider
 		.when("/", {
 			controller:"company",
-			//templateUrl:"views/companies/list.html"
+			templateUrl:"views/companies/list.html",
+			title:"Company"
 		})
 		.when("/add", {
-			controller:"companyadd"
+			controller:"companyadd",
+			templateUrl:"views/companies/add.html",
 		});
-}]);
+
+	// Removes the # in urls
+    $locationProvider.html5Mode({enabled:true,requireBase:false});
+});
 
 
-myApp.controller('company', function($scope, $http) {
+myApp.controller('company', function($http, $scope, $location) {
 
 	var url = "http://localhost/grm/companies/";
 	
@@ -20,59 +26,28 @@ myApp.controller('company', function($scope, $http) {
 		$scope.result = response;
 		$scope.jitz = "jitendra";
 	})
-	// $http.get('http://localhost/grm/companies/getlist')
-	// 	.then(function(response) {
-	// 		console.log(response);
-	// 	}, function(response) {
-	// 		console.log("error");
-	// 	});
-	// $scope.submitForm = function() {
-	// 	var data = {
-	// 		name : $scope.name,
-	// 		tag : $scope.tag,
-	// 		description : $scope.description,
-	// 		city : $scope.city,
-	// 		state : $scope.state,
-	// 		country : $scope.country
-	// 	};
-	// 	$http.post('add.json', data).success(function(data, status, header, config) {
-	// 		console.log(data);
-	// 		//$location.path('companies');
-	// 	}).error(function(data, status, header, config) {
-
-	// 	});	
-	// }
+	
 });
 
-myApp.controller('companyadd', function($scope, $http) {
-alert("sdfsdf");
-	console.log("add");
-	// var url = "http://localhost/grm/companies/";
+myApp.controller('companyadd', function($scope, $http, $location) {
 	
-	// $http.get(url).success(function(response) {
-	// 	$scope.result = response;
-	// 	$scope.jitz = "jitendra";
-	// });
-	// $http.get('http://localhost/grm/companies/getlist')
-	// 	.then(function(response) {
-	// 		console.log(response);
-	// 	}, function(response) {
-	// 		console.log("error");
-	// 	});
-	// $scope.submitForm = function() {
-	// 	var data = {
-	// 		name : $scope.name,
-	// 		tag : $scope.tag,
-	// 		description : $scope.description,
-	// 		city : $scope.city,
-	// 		state : $scope.state,
-	// 		country : $scope.country
-	// 	};
-	// 	$http.post('add.json', data).success(function(data, status, header, config) {
-	// 		console.log(data);
-	// 		//$location.path('companies');
-	// 	}).error(function(data, status, header, config) {
+	// var url = "http://localhost/grm/companies/";
 
-	// 	});	
-	// }
+	$scope.submitForm = function() {
+		var data = {
+			name : $scope.name,
+			tag : $scope.tag,
+			description : $scope.description,
+			city : $scope.city,
+			state : $scope.state,
+			country : $scope.country
+		};
+		$http.post('http://localhost/grm/companies/add', data)
+			.success(function(data, status, header, config) {
+			console.log(data);
+			$location.path('/');
+		}).error(function(data, status, header, config) {
+
+		});	
+	}
 });

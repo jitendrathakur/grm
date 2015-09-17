@@ -83,6 +83,7 @@ class CompaniesController extends AppController {
  * @return void
  */
 	public function edit($id = null) {
+		
 		if (!$this->Company->exists($id)) {
 			throw new NotFoundException(__('Invalid company'));
 		}
@@ -95,8 +96,10 @@ class CompaniesController extends AppController {
 			}
 		} else {
 			$options = array('conditions' => array('Company.' . $this->Company->primaryKey => $id));
-			$this->request->data = $this->Company->find('first', $options);
+			$data = $this->Company->find('first', $options);
+			return $this->_sendJson($data['Company']);
 		}
+		exit;
 	}
 
 /**
@@ -107,17 +110,20 @@ class CompaniesController extends AppController {
  * @return void
  */
 	public function delete($id = null) {
+		
 		$this->Company->id = $id;
 		if (!$this->Company->exists()) {
 			throw new NotFoundException(__('Invalid company'));
 		}
 		$this->request->allowMethod('post', 'delete');
 		if ($this->Company->delete()) {
-			$this->Session->setFlash(__('The company has been deleted.'));
+			//$this->Session->setFlash(__('The company has been deleted.'));
 		} else {
-			$this->Session->setFlash(__('The company could not be deleted. Please, try again.'));
+			//$this->Session->setFlash(__('The company could not be deleted. Please, try again.'));
 		}
-		return $this->redirect(array('action' => 'index'));
+		$response = array('success' => true);
+		return $this->_sendJson($response);
+		//return $this->redirect(array('action' => 'index'));
 	}
 
 /**

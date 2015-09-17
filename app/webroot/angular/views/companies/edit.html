@@ -1,0 +1,38 @@
+<form method="post" id="CompanyEditForm" action="">
+
+    </div>
+    <fieldset>
+        <legend>Edit Company</legend>
+        <input type="hidden" id="CompanyId" ng-model="company.id" name="id" >
+        <div class="input text required form-group">
+            <label for="CompanyName">Name</label>
+            <input type="text" required="required" id="CompanyName" maxlength="255" ng-model="company.name" name="name" class="form-control">
+        </div>
+        <div class="input text required form-group">
+            <label for="CompanyTag">Tag</label>
+            <input type="text" required="required" id="CompanyTag" maxlength="255" ng-model="company.tag" name="tag" class="form-control">
+        </div>
+        <div class="input textarea required form-group">
+            <label for="CompanyDescription">Description</label>
+            <textarea required="required" id="CompanyDescription" rows="6" cols="30" ng-model="company.description" name="description" class="form-control"></textarea>
+        </div>
+        <div class="input text required form-group">
+            <label for="CompanyCity">City</label>
+            <input type="text" required="required" id="CompanyCity" maxlength="255" ng-model="company.city" name="city" class="form-control">
+        </div>
+        <div class="input text required form-group">
+            <label for="CompanyState">State</label>
+            <input type="text" required="required" id="CompanyState" maxlength="255" ng-model="company.state" name="state" class="form-control">
+        </div>
+        <div class="input text required form-group">
+            <label for="CompanyCountry">Country</label>
+            <input type="text" required="required" id="CompanyCountry" maxlength="255" ng-model="company.country" name="country" class="form-control">
+        </div>
+        <div class="input text required form-group">
+            <label for="CompanyPincode">Pincode</label>
+            <input type="text" required="required" id="CompanyPincode" maxlength="20" ng-model="company.pincode" name="pincode" class="form-control">
+        </div>
+    </fieldset>
+
+    <input class="btn btn-info" type="button" ng-click="submitEditForm()" value="submit">
+</form>

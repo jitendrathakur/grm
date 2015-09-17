@@ -1,4 +1,5 @@
-<table>
+<h1>Company</h1>
+<table class="table table-responsive table-bordered">
 	<tr>
 		<th>Id</th>
 		<th>Name</th>
@@ -7,9 +8,11 @@
 	<tr ng-repeat="result in result">
 		<td>{{result.Company.id}}</td>
 		<td>{{result.Company.name}}</td>
-		<td>{{result.Company.city}}</td>					
+		<td>{{result.Company.city}}</td>
+		<td><a ng-href="edit/{{result.Company.id}}" >Edit</a></td>	
+		<td><button ng-click="deleteData(result.Company.id)" >Delete</button></td>				
 	</tr>
 	
 </table>
 
-<a ng-href="add" href="add">Add</a>
+<a class="btn btn-primary" ng-href="add" href="add"><span class="glyphicon glyphicon-plus"></span> Create</a>

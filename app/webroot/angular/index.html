@@ -3,22 +3,50 @@
 
 	<head>
 
-		<link rel="stylesheet" src="css/bootstrap.min.css" ></script>
-		<script type="text/javascript" src="js/angular.min.js" ></script>
-		<script type="text/javascript" src="js/ui-bootstrap-tpls-0.13.4.min.js" ></script>
+		<meta charset="utf8">
+		<title ng-bind="title | title"></title>
+        
+		<base href="http://localhost/grm/app/webroot/angular/">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" ></script>
+
+		<script type="text/javascript" src="jquery/jquery.min.js" ></script>	
+
+		<script type="text/javascript" src="bootstrap/js/bootstrap.min.js" ></script>	
+
+		<script type="text/javascript" src="js/angular.min.js" ></script>
 		
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular-resource.min.js"></script>
+
 		<script type="text/javascript" src="js/angular-route.min.js" ></script>
 		<script type="text/javascript" src="js/custom.js" ></script>
-		 <base href="http://localhost/grm/app/webroot/angular/">
+		 
 	</head>	
 		
 	<body ng-app="grm">
-		<div id="container">
-			<div ng-view=""></div>		
-		
-						
-		</div>	
+		<div id="wrapper" class="container">
+
+	        <!-- Navigation -->
+	        <nav class="navbar navbar-inverse" role="navigation">
+	            <!-- Brand and toggle get grouped for better mobile display -->
+	            <div class="navbar-header">
+	                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+	                    <span class="sr-only">Toggle navigation</span>
+	                    <span class="icon-bar"></span>
+	                    <span class="icon-bar"></span>
+	                    <span class="icon-bar"></span>
+	                </button>
+	                <a class="navbar-brand" href="index.html">GRM</a>
+	            </div>
+	        </nav>
+
+			<div id="container">
+				<div ng-view=""></div>		
+			
+							
+			</div>	
+		</div>
 	</body>
 
 </html>

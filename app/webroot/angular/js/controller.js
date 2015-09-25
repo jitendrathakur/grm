@@ -25,8 +25,45 @@ myApp.directive('company', function() {
 });
 
 
+myApp.directive('fileModel', ['$parse', function ($parse) {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            var model = $parse(attrs.fileModel);
+            var modelSetter = model.assign;
+            
+            element.bind('change', function(){
+                scope.$apply(function(){
+                    modelSetter(scope, element[0].files[0]);
+                });
+            });
+        }
+    };
+}]);
 
-myApp.controller('company', function($http, $scope, $location, $routeParams, $route, $resource, CONFIG) {
+myApp.service('fileUpload', ['$http', function ($http) {
+    this.uploadFileToUrl = function(file, input, uploadUrl){
+        
+        var data = new FormData();
+
+        data.append('UploadedFile', file);
+
+        for (var key in input) {        	
+        	data.append(key, input[key]);
+        }
+
+        $http.post(uploadUrl, data, {
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined}
+        })
+        .success(function(){
+        })
+        .error(function(){
+        });
+    }
+}]);
+
+myApp.controller('company', function($http, $scope, $location, $routeParams, $route, $resource, CONFIG, fileUpload) {
 
 	$scope.Grm = {};
 
@@ -57,7 +94,15 @@ myApp.controller('company', function($http, $scope, $location, $routeParams, $ro
 		});
 	}
 
+	$scope.setFile = function(element) {
+		//readUrl(element);
+		$scope.$apply(function($scope) {	
+			$scope.file = element.files[0];
+		})
+	}
+
 	$scope.submitForm = function() {
+
 		var data = {
 			name : $scope.name,
 			tag : $scope.tag,
@@ -65,15 +110,20 @@ myApp.controller('company', function($http, $scope, $location, $routeParams, $ro
 			city : $scope.city,
 			state : $scope.state,
 			country : $scope.country,
-			pincode : $scope.pincode
+			pincode : $scope.pincode			
 		};
-		var url = CONFIG.apiUrl + "companies/add";
-		$http.post(url, data)
-			.success(function(data, status, header, config) {			
-			$location.path('/');
-		}).error(function(data, status, header, config) {
 
-		});	
+		var uploadUrl = CONFIG.apiUrl + "companies/add";
+        var file = $scope.myFile;
+        
+        fileUpload.uploadFileToUrl(file, data, uploadUrl);
+		
+		// $http.post(url, data)
+		// 	.success(function(data, status, header, config) {			
+		// 	$location.path('/');
+		// }).error(function(data, status, header, config) {
+
+		// });	
 	}
 
 	$scope.submitEditForm = function() {
@@ -94,22 +144,6 @@ myApp.controller('company', function($http, $scope, $location, $routeParams, $ro
 		}).error(function(data, status, header, config) {
 
 		});	
-	}
-
-	var url = CONFIG.apiUrl + "companies/add";
-	$scope.uploadFile = function(files) {
-		//alert("test");
-		console.log(files);
-		var fd = new FormData();
-		//Take the first selected file
-		fd.append("file", files[0]);
-
-		$http.post(url, fd, {
-			withCredentials : true,
-			headers : {'Content-type' : 'undefined'},
-			transformRequest : angular.identity
-		}).success("ok")
-		.error("damn!");
-	}
-	
+	}	
+		
 });

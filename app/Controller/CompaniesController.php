@@ -58,11 +58,26 @@ class CompaniesController extends AppController {
  * @return void
  */
 	public function add() {
-		//debug($this->request->data);
+
+		// debug($_FILES);
+		// debug($this->request->data);
+		// exit;
+
+		$file_path = "img/";
+		$file_path = $file_path . basename($_FILES['UploadedFile']['name']);
+
+		if (move_uploaded_file($_FILES['UploadedFile']['tmp_name'], $file_path)) {
+			echo "success";
+		} else {
+			echo "fail";
+		}
+
 		$response = array();
 		if ($this->request->is('post')) {		
 			
 			$this->Company->create();
+			$this->request->data['image_path'] = $file_path;
+			$this->request->data['image_name'] = $_FILES['UploadedFile']['name'];
 			if ($this->Company->save($this->request->data)) {
 				//$this->Session->setFlash(__('The company has been saved.'));
 				

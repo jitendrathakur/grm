@@ -3,11 +3,13 @@
 <table class="table table-responsive table-bordered">
 	<tr>
 		<th>Id</th>
+		<th>Logo</th>
 		<th>Name</th>
 		<th>City</th>
 	</tr>
 	<tr ng-repeat="result in result">
 		<td>{{result.Company.id}}</td>
+		<td><img src="{{result.Company.image_path}}" /></td>
 		<td>{{result.Company.name}}</td>
 		<td>{{result.Company.city}}</td>
 		<td><a ng-href="edit/{{result.Company.id}}" >Edit</a></td>	
